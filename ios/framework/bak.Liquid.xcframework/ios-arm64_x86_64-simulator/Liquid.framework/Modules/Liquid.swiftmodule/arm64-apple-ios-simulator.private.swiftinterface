@@ -1,0 +1,543 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)
+// swift-module-flags: -target arm64-apple-ios12.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name Liquid
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import AVFoundation.AVCaptureVideoDataOutput
+import AVFoundation.AVCaptureVideoPreviewLayer
+import AVFoundation
+import AVKit
+import Accelerate
+import CoreGraphics.CGGeometry
+import CoreGraphics.CGImage
+import CoreImage.CIImage
+import CoreMedia.CMSampleBuffer
+import CoreVideo.CVPixelBuffer
+import CommonCrypto
+import CoreGraphics
+import CoreImage
+import CoreMedia
+import CoreNFC
+import CoreVideo
+import Foundation
+import ItrustEkycLibrary
+@_exported import Liquid
+import LiquidGraphicsAuthor
+import MobileCoreServices
+import Security
+import Swift
+import UIKit.UIColor
+import UIKit.UIImage
+import UIKit
+import VideoToolbox
+import WebKit
+import _Concurrency
+import _StringProcessing
+@_hasMissingDesignatedInitializers @objc public class ProcResult : ObjectiveC.NSObject {
+  @objc final public let status: Liquid.ResultStatus
+  @objc public var resultCode: Swift.String {
+    @objc get
+  }
+  @objc public var additionalData: Liquid.AdditionalData? {
+    @objc get
+  }
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc public class AdditionalData : ObjectiveC.NSObject {
+  @objc final public let maintenanceTitle: Swift.String
+  @objc final public let maintenanceMessage: Swift.String
+  @objc deinit
+}
+@objc public enum ResultStatus : Swift.Int {
+  case success
+  case maintenance
+  case permissionNotAllowed
+  case screenTimeout
+  case sessionTimeout
+  case ocrInProgress
+  case ocrUnSupported
+  case userCancel
+  case error
+  case chipLocked
+  case chipUnusual
+  case chipUnusualUpdated
+  case chipVerifyFailure
+  case chipUnusualResidencecard
+  case chipMissingExternalChar
+  case unsupportedChip
+  case chipPinFailure
+  case chipExpired
+  case chipForgotPin
+  case chipIdentifyDenied
+  case chipIdentifyError
+  case termsDoNotAgree
+  case communicationFailure
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class VerifyIdChipResult : ObjectiveC.NSObject {
+  @objc public var result: Liquid.ProcResult
+  @objc public var facePhotoVerification: Liquid.FacePhotoVerification?
+  @objc public var faceVerification: Liquid.FaceVerification?
+  @objc public var faceVerificationPassive: Liquid.FaceVerificationPassive?
+  @objc public var documentImage: Liquid.DocumentImage?
+  @objc public var chipData: Liquid.ChipData?
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc public class IdentifyIdChipResult : ObjectiveC.NSObject {
+  @objc public var result: Liquid.ProcResult
+  @objc public var jpkiResult: Liquid.JpkiResult
+  @objc public var jpkiEvidence: Liquid.JpkiEvidence
+  @objc public var chipData: Liquid.ChipData?
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class JpkiResult : ObjectiveC.NSObject {
+  @objc public var isSuccess: Swift.Bool
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class JpkiEvidence : ObjectiveC.NSObject {
+  @objc public var uid: Swift.String?
+  @objc public var asof: Swift.String?
+  @objc public var notBefore: Swift.String?
+  @objc public var notAfter: Swift.String?
+  @objc public var issuerDn: Swift.String?
+  @objc public var signatureId: Swift.String?
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class ChipData : ObjectiveC.NSObject {
+  @objc public var name: Swift.String?
+  @objc public var nameKana: Swift.String?
+  @objc public var previousName: Swift.String?
+  @objc public var birthday: Swift.String?
+  @objc public var address: Swift.String?
+  @objc public var idNumber: Swift.String?
+  @objc public var expireDate: Swift.String?
+  @objc public var zipCode: Swift.String?
+  @nonobjc public var sex: Liquid.Sex?
+  @available(swift, deprecated: 1.0, renamed: "sex")
+  @objc public var sexValue: Liquid.Sex {
+    @objc get
+    @objc set
+  }
+  @available(swift, deprecated: 1.0, renamed: "sex")
+  @objc public var sexValueIsValid: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc public var residenceCardComprehensivePermission: Swift.String?
+  @objc public var residenceCardIndividualPermission: Swift.String?
+  @nonobjc public var residenceCardUpdateStatus: Swift.Bool?
+  @available(swift, deprecated: 1.0, renamed: "residenceCardUpdateStatus")
+  @objc public var residenceCardUpdateStatusValue: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @available(swift, deprecated: 1.0, renamed: "residenceCardUpdateStatus")
+  @objc public var residenceCardUpdateStatusValueIsValid: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @nonobjc public var residenceCardInfoType: Liquid.ResidenceCardInfoType?
+  @available(swift, deprecated: 1.0, renamed: "residenceCardInfoType")
+  @objc public var residenceCardInfoTypeValue: Liquid.ResidenceCardInfoType {
+    @objc get
+    @objc set
+  }
+  @available(swift, deprecated: 1.0, renamed: "residenceCardInfoType")
+  @objc public var residenceCardInfoTypeValueIsValid: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @nonobjc public var residenceCardType: Liquid.ResidenceCardType?
+  @available(swift, deprecated: 1.0, renamed: "residenceCardType")
+  @objc public var residenceCardTypeValue: Liquid.ResidenceCardType {
+    @objc get
+    @objc set
+  }
+  @available(swift, deprecated: 1.0, renamed: "residenceCardType")
+  @objc public var residenceCardTypeValueIsValid: Swift.Bool {
+    @objc get
+    @objc set
+  }
+  @objc public var idFacePhoto: UIKit.UIImage?
+  @objc public var nameExternalCharacters: [UIKit.UIImage]
+  @objc public var previousNameExternalCharacters: [UIKit.UIImage]
+  @objc public var addressExternalCharacters: [UIKit.UIImage]
+  @available(*, deprecated)
+  @objc public func existExternalCharInName() -> Swift.Bool
+  @available(*, deprecated)
+  @objc public func existExternalCharInAddress() -> Swift.Bool
+  @objc public var isExistLatestName: Swift.Bool
+  @objc public var isExistLatestAddress: Swift.Bool
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc public class IdentifyIdChipParameters : ObjectiveC.NSObject {
+  @objc final public let base64TargetData: Swift.String?
+  @objc final public let enabledChipForgotPin: Swift.Bool
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc public class IdentifyIdChipParametersBuilder : ObjectiveC.NSObject {
+  @discardableResult
+  @objc public func setBase64TargetData(_ base64TargetData: Swift.String?) -> Liquid.IdentifyIdChipParametersBuilder
+  @discardableResult
+  @objc public func setEnabledChipForgotPin(_ enabledChipForgotPin: Swift.Bool) -> Liquid.IdentifyIdChipParametersBuilder
+  @objc public func build() -> Liquid.IdentifyIdChipParameters
+  @objc override dynamic public init()
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc public class OcrResult : ObjectiveC.NSObject {
+  @objc final public let result: Liquid.ProcResult
+  @objc final public let ocr: Liquid.OcrAcquisition?
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc public class IdDocumentVerification : ObjectiveC.NSObject {
+  @objc final public let result: Swift.Bool
+  @objc final public let score: Swift.Double
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc public class OcrAcquisition : ObjectiveC.NSObject {
+  @objc public var name: Swift.String?
+  @objc public var birthday: Swift.String?
+  @objc public var address: Swift.String?
+  @objc public var idNumber: Swift.String?
+  @objc public var expireDate: Swift.String?
+  @objc public var nationality: Swift.String?
+  @objc public var sex: Swift.String?
+  @objc public var zipCode: Swift.String?
+  @objc public var addressPref: Swift.String?
+  @objc public var addressCity: Swift.String?
+  @objc public var addressOther: Swift.String?
+  @objc public var driversLicenseTypes: [Swift.String]?
+  @objc public var residentStatus: Swift.String?
+  @objc public var stayPeriod: Swift.String?
+  @objc public var stayExpireDate: Swift.String?
+  @objc public var permittedDate: Swift.String?
+  @objc public var kindOfPermission: Swift.String?
+  @objc public var employmentRestriction: Swift.String?
+  @objc public var nameChanged: Swift.String?
+  @objc public var addressChanged: Swift.String?
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc public class LiquidEkyc : ObjectiveC.NSObject {
+  @objc public static func startVerify(endpoint: Foundation.URL, token: Swift.String, applicant: Swift.String, apiKey: Swift.String)
+  @objc public static func startVerify(endpoint: Foundation.URL, apiKey: Swift.String, completion: @escaping (Liquid.ProcResult) -> Swift.Void) -> Swift.String
+  @available(*, deprecated)
+  @objc public static func verifyFace(on viewController: UIKit.UIViewController, completion: @escaping (Liquid.VerifyFaceResult) -> Swift.Void)
+  @objc(verifyFaceWithParameters:on:completion:) public static func verifyFace(_ verifyFaceParameters: Liquid.VerifyFaceParameters, on viewController: UIKit.UIViewController, completion: @escaping (Liquid.VerifyFaceResult) -> Swift.Void)
+  @available(*, deprecated)
+  @objc public static func verifyIdDocument(_ document: Liquid.IdDocumentType, on viewController: UIKit.UIViewController, completion: @escaping (Liquid.VerifyIdDocumentResult) -> Swift.Void)
+  @available(*, deprecated)
+  @objc public static func verifyIdDocument(_ document: Liquid.IdDocumentType, _ verificationMethod: Liquid.VerificationMethod, on viewController: UIKit.UIViewController, completion: @escaping (Liquid.VerifyIdDocumentResult) -> Swift.Void)
+  @objc(verifyIdDocumentWithParameters:on:completion:) public static func verifyIdDocument(_ verifyIdDocumentParameters: Liquid.VerifyIdDocumentParameters, on viewController: UIKit.UIViewController, completion: @escaping (Liquid.VerifyIdDocumentResult) -> Swift.Void)
+  @available(*, deprecated)
+  @objc public static func verifyIdChip(_ document: Liquid.IdDocumentType, chipVerifyKey: Swift.String, on viewController: UIKit.UIViewController, completion: @escaping (Liquid.VerifyIdChipResult) -> Swift.Void)
+  @objc public static func verifyIdChip(_ document: Liquid.IdDocumentType, _ verificationMethod: Liquid.VerificationMethod, on viewController: UIKit.UIViewController, completion: @escaping (Liquid.VerifyIdChipResult) -> Swift.Void)
+  @objc public static func verifyIdChip(_ verificationMethod: Liquid.VerificationMethod, signature: Swift.String, verifyingParams: Swift.String, rawData: Liquid.ICRawData, on viewController: UIKit.UIViewController, completion: @escaping (Liquid.VerifyIdChipResult) -> Swift.Void)
+  @objc public static func verifyIdChipExcludeBack(_ verificationMethod: Liquid.VerificationMethod, signature: Swift.String, verifyingParams: Swift.String, rawData: Liquid.ICRawData, on viewController: UIKit.UIViewController, completion: @escaping (Liquid.VerifyIdChipResult) -> Swift.Void)
+  @available(*, deprecated)
+  @objc public static func identifyIdChip(_ base64TargetData: Swift.String? = nil, on viewController: UIKit.UIViewController, completion: @escaping (Liquid.IdentifyIdChipResult) -> Swift.Void)
+  @objc(identifyIdChipWithParameters:on:completion:) public static func identifyIdChip(_ parameters: Liquid.IdentifyIdChipParameters, on viewController: UIKit.UIViewController, completion: @escaping (Liquid.IdentifyIdChipResult) -> Swift.Void)
+  @available(*, deprecated)
+  @objc public static func endVerify()
+  @objc public static func activate(completion: @escaping (Liquid.ProcResult) -> Swift.Void)
+  @objc public static func getOcrResults(completion: @escaping (Liquid.OcrResult) -> Swift.Void)
+  @objc public static func showTermsOfUse(settings termsOfUseSettings: Liquid.TermsOfUseSettings? = nil, on viewController: UIKit.UIViewController, completion: @escaping (Liquid.ProcResult) -> Swift.Void)
+  @objc public static func customizeDesign(_ designSettings: Liquid.DesignSettings)
+  @objc public static func getVersion() -> Swift.String
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public enum ResidenceCardInfoType : Swift.Int {
+  case normal
+  case under_16
+  case noCertificate
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers @objc public class VerifyIdDocumentParameters : ObjectiveC.NSObject {
+  @objc final public let document: Liquid.IdDocumentType
+  @objc final public let verificationMethod: Liquid.VerificationMethod
+  @objc final public let showReviewScreen: Swift.Bool
+  @objc final public let useIdDocumentVerification: Swift.Bool
+  @objc deinit
+}
+@objc public class VerifyIdDocumentParametersBuilder : ObjectiveC.NSObject {
+  @objc public init(document: Liquid.IdDocumentType, verificationMethod: Liquid.VerificationMethod)
+  @discardableResult
+  @objc public func setShowReviewScreen(_ showReviewScreen: Swift.Bool) -> Liquid.VerifyIdDocumentParametersBuilder
+  @discardableResult
+  @objc public func setUseIdDocumentVerification(_ useIdDocumentVerification: Swift.Bool) -> Liquid.VerifyIdDocumentParametersBuilder
+  @objc public func build() -> Liquid.VerifyIdDocumentParameters
+  @objc deinit
+}
+@objc public class TermsOfUseSettings : ObjectiveC.NSObject {
+  @objc final public let headerFontColor: UIKit.UIColor?
+  @objc final public let screenBgColor: UIKit.UIColor?
+  @objc final public let prefaceFontColor: UIKit.UIColor?
+  @objc final public let buttonInactiveBgColor: UIKit.UIColor?
+  @objc final public let buttonActiveBgColor: UIKit.UIColor?
+  @objc final public let buttonFontColor: UIKit.UIColor?
+  @objc public init(headerFontColor: UIKit.UIColor? = nil, screenBgColor: UIKit.UIColor? = nil, prefaceFontColor: UIKit.UIColor? = nil, buttonInactiveBgColor: UIKit.UIColor? = nil, buttonActiveBgColor: UIKit.UIColor? = nil, buttonFontColor: UIKit.UIColor? = nil)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc public class VerifyFaceParameters : ObjectiveC.NSObject {
+  @objc final public let showReviewScreen: Swift.Bool
+  @objc final public let faceVerificationType: Liquid.FaceVerificationType
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc public class VerifyFaceParametersBuilder : ObjectiveC.NSObject {
+  @discardableResult
+  @objc public func setShowReviewScreen(_ showReviewScreen: Swift.Bool) -> Liquid.VerifyFaceParametersBuilder
+  @discardableResult
+  @objc public func setFaceVerificationType(_ verifyType: Liquid.FaceVerificationType) -> Liquid.VerifyFaceParametersBuilder
+  @objc public func build() -> Liquid.VerifyFaceParameters
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public enum FaceVerificationType : Swift.Int {
+  case active = 0
+  case passive = 1
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum ResidenceCardType : Swift.Int {
+  case undetected
+  case residenceCard
+  case specialPermanentResidentCertificate
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers @objc public class DesignSettings : ObjectiveC.NSObject {
+  @objc final public let positiveButtonInactiveBgColor: UIKit.UIColor?
+  @objc final public let positiveButtonActiveBgColor: UIKit.UIColor?
+  @objc final public let positiveButtonFontColor: UIKit.UIColor?
+  @objc final public let negativeButtonBgColor: UIKit.UIColor?
+  final public let negativeButtonFontColor: UIKit.UIColor?
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc public class DesignSettingsBuilder : ObjectiveC.NSObject {
+  @discardableResult
+  @objc public func setPositiveButtonInactiveBgColor(_ color: UIKit.UIColor) -> Liquid.DesignSettingsBuilder
+  @discardableResult
+  @objc public func setPositiveButtonActiveBgColor(_ color: UIKit.UIColor) -> Liquid.DesignSettingsBuilder
+  @discardableResult
+  @objc public func setPositiveButtonFontColor(_ color: UIKit.UIColor) -> Liquid.DesignSettingsBuilder
+  @discardableResult
+  @objc public func setNegativeButtonBgColor(_ color: UIKit.UIColor) -> Liquid.DesignSettingsBuilder
+  @discardableResult
+  @objc public func setNegativeButtonFontColor(_ color: UIKit.UIColor) -> Liquid.DesignSettingsBuilder
+  @objc public func build() -> Liquid.DesignSettings
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public enum VerificationMethod : Swift.Int {
+  case complyHe = 1
+  case readFace
+  case complyTo
+  case complyChi
+  case read
+  case complyHo
+  case frontFace
+  case front
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum IdDocumentType : Swift.Int {
+  case driverLicence = 1
+  case mynumberCard
+  case residenceCard
+  case passport
+  case driverLicenseHistory = 6
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension Liquid.IdDocumentType : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+extension Liquid.IdDocumentType : Swift.CaseIterable {
+  public typealias AllCases = [Liquid.IdDocumentType]
+  public static var allCases: [Liquid.IdDocumentType] {
+    get
+  }
+}
+@objc public enum Sex : Swift.Int {
+  case male
+  case female
+  case others
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers @objc public class VerifyFaceResult : ObjectiveC.NSObject {
+  @objc final public let result: Liquid.ProcResult
+  @objc final public let facePhotoVerification: Liquid.FacePhotoVerification?
+  @objc final public let faceVerification: Liquid.FaceVerification?
+  @objc final public let faceVerificationPassive: Liquid.FaceVerificationPassive?
+  @objc final public let faceImage: Liquid.FaceImage?
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class FacePhotoVerification : ObjectiveC.NSObject {
+  @objc final public let result: Liquid.FacePhotoVerificationResult
+  @objc final public let score: Swift.Int
+  @objc deinit
+}
+@objc public enum FacePhotoVerificationResult : Swift.Int {
+  case high = 0
+  case middle
+  case low
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class FaceVerification : ObjectiveC.NSObject {
+  @objc final public let result: Liquid.FaceVerificationResult
+  @objc final public let score: Swift.Int
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc public class FaceVerificationPassive : ObjectiveC.NSObject {
+  @objc final public let result: Swift.Bool
+  @objc deinit
+}
+@objc public enum FaceVerificationResult : Swift.Int {
+  case same = 0
+  case notEqual
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class FaceImage : ObjectiveC.NSObject {
+  @objc final public let faceFront: UIKit.UIImage
+  @objc final public let liveness: Liquid.Liveness
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class Liveness : ObjectiveC.NSObject {
+  @objc final public let pattern1: UIKit.UIImage
+  @objc final public let pattern2: UIKit.UIImage
+  @objc final public let pattern3: UIKit.UIImage
+  @objc final public let pattern4: UIKit.UIImage
+  @objc final public let pattern5: UIKit.UIImage
+  @objc final public let pattern6: UIKit.UIImage
+  @objc final public let pattern7: UIKit.UIImage
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc public class VerifyIdDocumentResult : ObjectiveC.NSObject {
+  @objc final public let result: Liquid.ProcResult
+  @objc final public let facePhotoVerification: Liquid.FacePhotoVerification?
+  @objc final public let faceVerification: Liquid.FaceVerification?
+  @objc final public let faceVerificationPassive: Liquid.FaceVerificationPassive?
+  @objc final public let idDocumentVerification: Liquid.IdDocumentVerification?
+  @objc final public let documentImage: Liquid.DocumentImage?
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class DocumentImage : ObjectiveC.NSObject {
+  @objc final public let front: UIKit.UIImage
+  @available(*, deprecated)
+  @objc final public let diagonal: UIKit.UIImage
+  @objc final public let diagonalOrNil: UIKit.UIImage?
+  @available(*, deprecated)
+  @objc final public let back: UIKit.UIImage?
+  @objc final public let backOrNil: UIKit.UIImage?
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers public class ICRawData : ObjectiveC.NSObject {
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public class DriverLicenseRawData : Liquid.ICRawData {
+  @objc final public let licenseEntriesRawData: Swift.String
+  @objc final public let registeredDomicileRawData: Swift.String
+  @objc final public let photoRawData: Swift.String
+  @objc final public let photo: Foundation.Data
+  @objc final public let idNumber: Swift.String
+  @objc final public let newName: Swift.String?
+  @objc final public let newNameKana: Swift.String?
+  @objc final public let newPreviousName: Swift.String?
+  @objc final public let newAddress: Swift.String?
+  @objc final public let externalCharacterName: [Liquid.DriverLicenseExternalCharacter]?
+  @objc final public let externalCharacterAddress: [Liquid.DriverLicenseExternalCharacter]?
+  @objc final public let externalCharacterNewName: [Liquid.DriverLicenseExternalCharacter]?
+  @objc final public let externalCharacterPreviousName: [Liquid.DriverLicenseExternalCharacter]?
+  @objc final public let externalCharacterNewPreviousName: [Liquid.DriverLicenseExternalCharacter]?
+  @objc final public let externalCharacterNewAddress: [Liquid.DriverLicenseExternalCharacter]?
+  @objc public var isExistLatestName: Swift.String?
+  @objc public var isExistLatestAddress: Swift.String?
+  @objc public init(licenseEntriesRawData: Swift.String, registeredDomicileRawData: Swift.String, photoRawData: Swift.String, photo: Foundation.Data, idNumber: Swift.String, newName: Swift.String? = nil, newNameKana: Swift.String? = nil, newPreviousName: Swift.String? = nil, newAddress: Swift.String? = nil, externalCharacterName: [Liquid.DriverLicenseExternalCharacter]? = nil, externalCharacterAddress: [Liquid.DriverLicenseExternalCharacter]? = nil, externalCharacterNewName: [Liquid.DriverLicenseExternalCharacter]? = nil, externalCharacterPreviousName: [Liquid.DriverLicenseExternalCharacter]? = nil, externalCharacterNewPreviousName: [Liquid.DriverLicenseExternalCharacter]? = nil, externalCharacterNewAddress: [Liquid.DriverLicenseExternalCharacter]? = nil, isExistLatestName: Swift.String? = nil, isExistLatestAddress: Swift.String? = nil)
+  @objc deinit
+}
+@objc public class DriverLicenseExternalCharacter : ObjectiveC.NSObject {
+  @objc final public let size: Swift.Int
+  @objc final public let image: Foundation.Data
+  @objc public init(size: Swift.Int, image: Foundation.Data)
+  @objc deinit
+}
+@objc public class MyNumberCardRawData : Liquid.ICRawData {
+  @objc final public let rawData: Swift.String
+  @objc final public let expireDate: Swift.String
+  @objc final public let photo: Foundation.Data
+  @objc public init(rawData: Swift.String, expireData: Swift.String, photo: Foundation.Data)
+  @objc deinit
+}
+@objc public class ResidenceCardRawData : Liquid.ICRawData {
+  @objc final public let rawData: Swift.String
+  @objc final public let photo: Foundation.Data
+  @objc final public let frontDocumentImage: Foundation.Data
+  @objc final public let residenceCardUpdateStatus: Swift.Bool
+  @objc final public let residenceCardInfoType: Swift.Int
+  @objc final public let residenceCardType: Swift.Int
+  @objc final public let residenceCardComprehensivePermission: Swift.String?
+  @objc final public let residenceCardIndividualPermission: Swift.String?
+  @objc public init(rawData: Swift.String, photo: Foundation.Data, frontDocumentImage: Foundation.Data, residenceCardUpdateStatus: Swift.Bool, residenceCardInfoType: Swift.Int, residenceCardType: Swift.Int, residenceCardComprehensivePermission: Swift.String? = nil, residenceCardIndividualPermission: Swift.String? = nil)
+  @objc deinit
+}
+extension Liquid.ResultStatus : Swift.Equatable {}
+extension Liquid.ResultStatus : Swift.Hashable {}
+extension Liquid.ResultStatus : Swift.RawRepresentable {}
+extension Liquid.Sex : Swift.Equatable {}
+extension Liquid.Sex : Swift.Hashable {}
+extension Liquid.Sex : Swift.RawRepresentable {}
+extension Liquid.IdDocumentType : Swift.Equatable {}
+extension Liquid.IdDocumentType : Swift.Hashable {}
+extension Liquid.IdDocumentType : Swift.RawRepresentable {}
+extension Liquid.ResidenceCardInfoType : Swift.Equatable {}
+extension Liquid.ResidenceCardInfoType : Swift.Hashable {}
+extension Liquid.ResidenceCardInfoType : Swift.RawRepresentable {}
+extension Liquid.FaceVerificationType : Swift.Equatable {}
+extension Liquid.FaceVerificationType : Swift.Hashable {}
+extension Liquid.FaceVerificationType : Swift.RawRepresentable {}
+extension Liquid.ResidenceCardType : Swift.Equatable {}
+extension Liquid.ResidenceCardType : Swift.Hashable {}
+extension Liquid.ResidenceCardType : Swift.RawRepresentable {}
+extension Liquid.VerificationMethod : Swift.Equatable {}
+extension Liquid.VerificationMethod : Swift.Hashable {}
+extension Liquid.VerificationMethod : Swift.RawRepresentable {}
+extension Liquid.FacePhotoVerificationResult : Swift.Equatable {}
+extension Liquid.FacePhotoVerificationResult : Swift.Hashable {}
+extension Liquid.FacePhotoVerificationResult : Swift.RawRepresentable {}
+extension Liquid.FaceVerificationResult : Swift.Equatable {}
+extension Liquid.FaceVerificationResult : Swift.Hashable {}
+extension Liquid.FaceVerificationResult : Swift.RawRepresentable {}

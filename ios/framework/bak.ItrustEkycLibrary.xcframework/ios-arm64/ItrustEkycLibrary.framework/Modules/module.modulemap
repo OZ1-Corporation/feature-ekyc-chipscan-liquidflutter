@@ -1,0 +1,11 @@
+framework module ItrustEkycLibrary {
+  umbrella header "ItrustEkycLibrary.h"
+
+  export *
+  module * { export * }
+}
+
+module ItrustEkycLibrary.Swift {
+    header "ItrustEkycLibrary-Swift.h"
+    requires objc
+}
